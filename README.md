@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quality Gypsum Services — Website
 
-## Getting Started
+A modern rebuild of **qualitygypsum.ca** (previously WordPress + Elementor on Hostinger) as a
+**Next.js 16 (App Router) + Tailwind CSS v4** site, ready to deploy on **Vercel**.
 
-First, run the development server:
+The rebuild is a design/tech refresh that **preserves every existing URL** so Google rankings carry
+over on migration.
+
+## Tech stack
+
+- Next.js 16 (App Router, React 19)
+- Tailwind CSS v4
+- Self-hosted fonts (Archivo + Inter via `@fontsource`) — no external font fetch
+- Fully static/SSG pages + one serverless route (`/api/contact`)
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+npm start          # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+  page.tsx                     Home
+  about/                       /about/
+  services/                    /services/  + [slug] (5 services) + t-bar-calculator/
+  projects/                    /projects/  + [slug] (10 projects)
+  blog/                        /blog/
+  [slug]/                      Root-level blog posts (e.g. /basement-development-in-calgary/)
+  work-with-us/                /work-with-us/
+  contact-us/                  /contact-us/  (+ ContactForm client component)
+  privacy-policy-2/  terms-of-service/
+  api/contact/route.ts         Quote-form handler (Resend, with mailto fallback)
+  sitemap.ts  robots.ts        Auto-generated /sitemap.xml and /robots.txt
+lib/
+  site.ts  services.ts  projects.ts  blog.ts    All content lives here
+components/                     Header, Footer, Section, Button, icons
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**All page content lives in `lib/`** — edit `services.ts`, `projects.ts`, `blog.ts`, and `site.ts`
+to update copy, add projects, or add blog posts. Adding a blog post there automatically creates its
+page, sitemap entry, and links.
 
-## Learn More
+## URL preservation (SEO)
 
-To learn more about Next.js, take a look at the following resources:
+- `trailingSlash: true` in `next.config.ts` — every indexed URL keeps resolving with a **200**.
+- Non-trailing requests **308** to the trailing form (no lost link equity).
+- Old Rank Math sitemaps (`/sitemap_index.xml`, `/post-sitemap.xml`, …) **301** to `/sitemap.xml`.
+- Unknown URLs return a proper **404**.
+- Every page has a unique `<title>`, meta description, and canonical; blog posts include
+  `BlogPosting` JSON-LD.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`/api/contact` sends quote requests by email. Set `RESEND_API_KEY` (see `.env.example`) for seamless
+delivery. **Without a key it still works** — the form falls back to a pre-filled `mailto:` so leads
+always reach info@qualitygypsum.ca.
 
-## Deploy on Vercel
+## Deploy to Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push this folder to a GitHub repo.
+2. In Vercel: **New Project → import the repo**. Framework auto-detects as Next.js — no build
+   config needed.
+3. (Optional) add `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM` under Project → Settings →
+   Environment Variables.
+4. Deploy. Vercel auto-deploys `main` on every commit; a failed build leaves the previous deploy
+   live.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `MIGRATION.md` for the full DNS cutover runbook.
