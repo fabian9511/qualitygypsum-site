@@ -40,7 +40,16 @@ export const metadata: Metadata = {
     title: "Quality Gypsum Services | Drywall Contractor in Calgary",
     description:
       "Commercial and residential drywall, framing, insulation, and ceilings across Calgary and surrounding areas.",
+    images: [
+      {
+        url: "/images/plans-review.jpg",
+        width: 1600,
+        height: 1067,
+        alt: "Quality Gypsum Services crew reviewing plans on a Calgary jobsite",
+      },
+    ],
   },
+  twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 

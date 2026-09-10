@@ -36,7 +36,15 @@ export const localBusinessSchema = {
       closes: "16:00",
     },
   ],
-  sameAs: [site.social.facebook, site.social.instagram],
+  sameAs: [site.social.facebook, site.social.instagram, site.social.linkedin, site.social.yelp],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+14038092908",
+    email: site.email,
+    contactType: "sales",
+    areaServed: "CA",
+    availableLanguage: "en",
+  },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Drywall & interior services",
@@ -89,5 +97,17 @@ export function serviceSchema(s: {
     url: `${base}${s.href}`,
     provider: { "@id": `${base}/#business` },
     areaServed: site.serviceAreas.map((name) => ({ "@type": "City", name })),
+  };
+}
+
+export function faqSchema(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.question,
+      acceptedAnswer: { "@type": "Answer", text: it.answer },
+    })),
   };
 }

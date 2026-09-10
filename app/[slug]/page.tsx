@@ -23,19 +23,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const description = metaDescription(post.excerpt);
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
     alternates: { canonical: `/${post.slug}/` },
     openGraph: {
       type: "article",
       title: post.title,
-      description: post.excerpt,
+      description,
       url: `${site.domain}/${post.slug}/`,
       publishedTime: post.date,
-      images: post.image ? [`${site.domain}${post.image}`] : undefined,
+      images: [`${site.domain}${post.image ?? "/images/plans-review.jpg"}`],
     },
   };
+}
+
+// Google truncates descriptions around 155–160 characters; trim long excerpts
+// at a word boundary so search snippets stay complete.
+function metaDescription(text: string, max = 155) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:\-–—]$/, "") + "…";
 }
 
 function formatDate(iso: string) {
@@ -134,10 +143,19 @@ export default async function BlogPostPage({
 
       <section className="bg-white">
         <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.5fr_0.7fr]">
-          <article
-            className="prose-blog max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+          <div>
+            <p className="mb-8 border-l-4 border-accent pl-4 text-sm text-muted">
+              From the crew at{" "}
+              <Link href="/" className="font-semibold text-ink hover:text-accent-dark">
+                Quality Gypsum Services, a drywall contractor in Calgary
+              </Link>
+              .
+            </p>
+            <article
+              className="prose-blog max-w-none"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
+          </div>
 
           <aside className="h-fit lg:sticky lg:top-28">
             <div className="rounded-3xl bg-ink p-7 text-white">

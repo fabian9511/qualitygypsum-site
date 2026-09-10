@@ -76,6 +76,9 @@ export async function generateMetadata({
     title: `${cat.name} Articles | Quality Gypsum Blog`,
     description: cat.description,
     alternates: { canonical: `/category/${slug}/` },
+    // Thin archive pages: keep them resolving (200) but out of the index so they
+    // don't compete with the posts and service pages.
+    robots: { index: false, follow: true },
   };
 }
 

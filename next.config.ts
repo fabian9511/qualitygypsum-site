@@ -24,6 +24,13 @@ const nextConfig: NextConfig = {
       // Convenience aliases (old nav sometimes linked these).
       { source: "/contact/", destination: "/contact-us/", permanent: true },
       { source: "/privacy-policy/", destination: "/privacy-policy-2/", permanent: true },
+      // Consolidated blog posts — duplicates and thin pages that competed with the
+      // homepage / service pages for "drywall contractor Calgary" and split rankings.
+      { source: "/drywallcontractorstips/", destination: "/drywall-contractors-in-calgary/", permanent: true },
+      { source: "/drywall-contractors-in-calgary-quality-gypsum-services/", destination: "/", permanent: true },
+      { source: "/professional-drywall-contractor/", destination: "/", permanent: true },
+      { source: "/drywall-installation/", destination: "/services/drywall/", permanent: true },
+      { source: "/basementdevelopment/", destination: "/basement-development-for-homeowners/", permanent: true },
     ];
   },
 };

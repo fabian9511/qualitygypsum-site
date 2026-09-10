@@ -21,7 +21,7 @@ export const services: Service[] = [
     href: "/services/steel-stud-framing/",
     excerpt:
       "The foundational step for interior walls and ceilings — durable, stable, and fire-resistant framing built to engineering standards.",
-    metaTitle: "Steel Stud Framing | Quality Gypsum Services | Calgary",
+    metaTitle: "Steel Stud Framing in Calgary",
     metaDescription:
       "Professional steel stud framing in Calgary — shop drawings to installation. Durable, straight, fire-resistant framing built to engineering standards.",
     hero: "Precision steel stud framing for commercial and residential builds.",
@@ -61,7 +61,7 @@ export const services: Service[] = [
     href: "/services/insulation/",
     excerpt:
       "Comfortable, energy-efficient, soundproofed spaces — spray foam, loosefill, batts, and mineral wool tailored to your project.",
-    metaTitle: "Insulation & Spray Foam | Quality Gypsum Services | Calgary",
+    metaTitle: "Insulation & Spray Foam in Calgary",
     metaDescription:
       "Spray foam, loosefill, fiberglass batt, and Rockwool insulation in Calgary. Energy-efficient, soundproofed, code-compliant installation.",
     hero: "The right insulation for a comfortable, efficient, quiet space.",
@@ -96,7 +96,7 @@ export const services: Service[] = [
     href: "/services/drywall/",
     excerpt:
       "Premium drywall installation and finishing — from prep and hanging to Level 5 finishes and pre-occupancy touch-ups.",
-    metaTitle: "Drywall Contractor in Calgary | Quality Gypsum Services",
+    metaTitle: "Drywall Installation & Taping in Calgary",
     metaDescription:
       "Top-rated drywall installation, taping, and finishing in Calgary. Level 4 and Level 5 finishes, texture, sanding, priming, and touch-ups.",
     hero: "Premium drywall installation and finishing across Calgary.",
@@ -124,7 +124,7 @@ export const services: Service[] = [
     href: "/services/acoustical-ceilings/",
     excerpt:
       "Expert T-bar grid and tile installation — custom ceilings, clouds, and clean layouts that meet industry standards.",
-    metaTitle: "Acoustical Ceilings & T-Bar | Quality Gypsum Services | Calgary",
+    metaTitle: "Acoustical Ceilings & T-Bar Installation in Calgary",
     metaDescription:
       "Acoustical ceiling grid and tile (T-bar) installation in Calgary. Custom T-bar ceilings, clouds, and precise grid layouts to industry standards.",
     hero: "Acoustical ceiling grid and tile, installed right.",
@@ -159,7 +159,7 @@ export const services: Service[] = [
     href: "/services/basement-development/",
     excerpt:
       "Legal suites and finished living space, built to commercial standards by full-time drywall and steel stud crews.",
-    metaTitle: "Basement Development in Calgary | Quality Gypsum Services",
+    metaTitle: "Basement Development in Calgary",
     metaDescription:
       "Basement development in Calgary built to commercial standards. Legal secondary suites and finished basements — framed, boarded, and finished right.",
     hero: "Basement development in Calgary, built to commercial standards.",

@@ -42,20 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Blog category archives (match the old WordPress category URLs).
-  const categories = [
-    "blog",
-    "drywall",
-    "construction",
-    "insulation",
-    "taping",
-    "fire-rating",
-    "steel-stud-framing",
-    "sprayfoam",
-  ];
-  for (const slug of categories) {
-    entries.push({ url: u(`/category/${slug}/`), changeFrequency: "monthly", priority: 0.4 });
-  }
+  // Category archives are noindex, so they are intentionally not listed here.
 
   return entries;
 }
