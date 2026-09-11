@@ -4,17 +4,20 @@ import Image from "next/image";
 import { PageHero, CTASection } from "@/components/Section";
 import { projects } from "@/lib/projects";
 import { ArrowRight } from "@/components/icons";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Projects | Drywall Contractor Portfolio | Calgary",
+  title: "Drywall Projects in Calgary",
   description:
-    "A portfolio of Quality Gypsum Services projects across Calgary — commercial builds, tenant improvements, warehouses, schools, and custom homes.",
+    "Drywall projects by Quality Gypsum Services across Calgary and area: commercial builds, tenant improvements, warehouses, schools, and custom homes.",
   alternates: { canonical: "/projects/" },
 };
 
 export default function ProjectsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Projects", path: "/projects/" }])} />
       <PageHero
         eyebrow="Our Work"
         title="Projects across Calgary & area"
@@ -23,7 +26,16 @@ export default function ProjectsPage() {
 
       <section className="bg-white">
         <div className="container-x py-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="leading-relaxed text-muted">
+              Each project below was delivered by Quality Gypsum Services as the drywall contractor:
+              steel stud framing, insulation and spray foam, drywall and taping, acoustical ceilings,
+              or the full interior package. General contractors, developers, and homeowners across
+              Calgary, Airdrie, and southern Alberta trust the same crews for warehouses, schools,
+              offices, and custom homes.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p) => (
               <Link
                 key={p.slug}
@@ -33,7 +45,7 @@ export default function ProjectsPage() {
                 <div className="relative h-52 overflow-hidden">
                   <Image
                     src={p.image}
-                    alt={p.title}
+                    alt={`${p.title}: ${p.category.toLowerCase()} drywall project by Quality Gypsum Services`}
                     width={800}
                     height={534}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"

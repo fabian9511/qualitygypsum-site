@@ -3,11 +3,13 @@ import Link from "next/link";
 import { PageHero, CTASection, ServiceAreasStrip } from "@/components/Section";
 import { services } from "@/lib/services";
 import { ArrowRight, Ruler, Shield, Layers, Grid, Home as HomeIcon } from "@/components/icons";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Services | Best Drywall Contractors | Calgary",
+  title: "Drywall Services in Calgary",
   description:
-    "Professional drywall services for residential and commercial projects in Calgary — steel stud framing, insulation and spray foam, drywall and finishing, acoustical ceilings, and basement development.",
+    "Drywall services in Calgary for homes and commercial projects: steel stud framing, insulation, spray foam, drywall and taping, acoustical ceilings, basements.",
   alternates: { canonical: "/services/" },
 };
 
@@ -22,6 +24,7 @@ const icons: Record<string, React.ComponentType<{ width?: number; height?: numbe
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services/" }])} />
       <PageHero
         eyebrow="Our Services"
         title="Professional drywall services in Calgary"
@@ -70,6 +73,30 @@ export default function ServicesPage() {
                 Open calculator <ArrowRight width={16} height={16} />
               </span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-paper">
+        <div className="container-x grid gap-10 py-16 lg:grid-cols-2">
+          <div>
+            <h2 className="text-2xl text-ink">One contractor for the whole interior scope</h2>
+            <p className="mt-4 leading-relaxed text-muted">
+              Most projects need more than one of these trades, and handing them to separate outfits is
+              where schedules slip. Quality Gypsum Services frames, insulates, boards, tapes, and hangs the
+              ceiling with the same full-time crews, so the framing is straight for the boarders and the
+              board is flat for the finishers. Builders get one accountable contractor and one fixed
+              written scope.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-2xl text-ink">How every job runs</h2>
+            <ol className="mt-4 space-y-3 text-muted">
+              <li><strong className="text-ink">1. Site visit.</strong> An on-site measure, no obligation, anywhere in Calgary and the surrounding towns.</li>
+              <li><strong className="text-ink">2. Fixed written scope.</strong> A reply within one business day with a firm number. No moving prices.</li>
+              <li><strong className="text-ink">3. Build.</strong> Our own crews frame, insulate, board, and finish to Level 4 or Level 5.</li>
+              <li><strong className="text-ink">4. Walkthrough.</strong> Pre-occupancy touch-ups and handoff, ready for paint or move-in.</li>
+            </ol>
           </div>
         </div>
       </section>

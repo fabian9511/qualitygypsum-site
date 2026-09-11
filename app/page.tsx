@@ -60,6 +60,11 @@ const faqs = [
       "Level 4 is our standard paint-ready finish. We also deliver Level 5 for flat ceilings and critical-lighting areas, and knockdown or custom textures where the design calls for them.",
   },
   {
+    question: "Are you insured and WCB covered?",
+    answer:
+      "Yes. Quality Gypsum Services is insured and WCB covered, and our crews are full-time employees, which is what general contractors and permit-ready basement suites require.",
+  },
+  {
     question: "What else do you do besides drywall and taping?",
     answer:
       "Steel stud framing from shop drawings to installation, insulation and spray foam, acoustical T-bar ceilings, and complete basement development.",

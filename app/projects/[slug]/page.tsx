@@ -5,6 +5,24 @@ import { notFound } from "next/navigation";
 import { projects, getProject } from "@/lib/projects";
 import { CTASection } from "@/components/Section";
 import { ArrowRight, Check } from "@/components/icons";
+import { services } from "@/lib/services";
+import { site } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
+
+// Map scope lines to the service pages they belong to, so every project links
+// back to the services it demonstrates.
+function relatedServices(scope: string[]) {
+  const text = scope.join(" ").toLowerCase();
+  return services.filter((s) => {
+    if (s.slug === "steel-stud-framing") return /stud|framing|partition/.test(text);
+    if (s.slug === "insulation") return /insulation|spray foam/.test(text);
+    if (s.slug === "drywall") return /drywall|taping|level|finish/.test(text);
+    if (s.slug === "acoustical-ceilings") return /ceiling|t-bar|acoustical/.test(text);
+    if (s.slug === "basement-development") return /basement|suite/.test(text);
+    return false;
+  });
+}
 
 export const dynamicParams = false;
 
@@ -20,10 +38,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const place = project.location ?? "Calgary, Alberta";
+  const description = `${project.category} drywall project in ${place} by Quality Gypsum Services. ${project.excerpt}`;
   return {
-    title: `${project.title} | Projects`,
-    description: project.excerpt,
+    title: { absolute: `${project.title} | Quality Gypsum Projects` },
+    description: description.length > 158 ? description.slice(0, 155).replace(/\s+\S*$/, "") + "…" : description,
     alternates: { canonical: project.href },
+    openGraph: {
+      type: "article",
+      title: `${project.title} | Quality Gypsum Services`,
+      description: project.excerpt,
+      url: `${site.domain}${project.href}`,
+      images: [`${site.domain}${project.image}`],
+    },
   };
 }
 
@@ -37,9 +64,16 @@ export default async function ProjectDetailPage({
   if (!project) notFound();
 
   const more = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+  const related = relatedServices(project.scope);
+  const crumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Projects", path: "/projects/" },
+    { name: project.title, path: project.href },
+  ]);
 
   return (
     <>
+      <JsonLd data={crumbs} />
       <section className="relative overflow-hidden bg-ink text-white">
         <div
           className="absolute inset-0 opacity-[0.05]"
@@ -77,7 +111,7 @@ export default async function ProjectDetailPage({
           <div className="overflow-hidden rounded-3xl border border-line shadow-[var(--shadow-card)]">
             <Image
               src={project.image}
-              alt={project.title}
+              alt={`${project.title}: ${project.scope.join(", ").toLowerCase()} by Quality Gypsum Services`}
               width={1600}
               height={900}
               className="aspect-[16/9] w-full object-cover"
@@ -96,6 +130,32 @@ export default async function ProjectDetailPage({
                 <p key={i}>{p}</p>
               ))}
             </div>
+
+            {related.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-2xl text-ink">Services on this project</h2>
+                <p className="mt-3 text-muted">
+                  Quality Gypsum Services was the drywall contractor on this {project.category.toLowerCase()} project
+                  {project.location ? ` in ${project.location.replace(", Alberta", "")}` : ""}. The scope above is
+                  delivered by our own full-time crews, the same way on every job.
+                </p>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {related.map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={s.href}
+                        className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)]"
+                      >
+                        <span className="font-display text-base font-bold text-ink group-hover:text-accent-dark">
+                          {s.title}
+                        </span>
+                        <span className="mt-2 text-sm leading-relaxed text-muted">{s.excerpt}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <aside className="h-fit rounded-3xl border border-line bg-paper p-7">
             {(project.size || project.location || project.gc) && (

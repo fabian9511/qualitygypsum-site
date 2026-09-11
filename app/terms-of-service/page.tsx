@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/Section";
 import { site } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -11,6 +13,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Terms of Service", path: "/terms-of-service/" }])} />
       <PageHero eyebrow="Legal" title="Terms of Service" />
       <section className="bg-white">
         <div className="container-x max-w-3xl py-16">

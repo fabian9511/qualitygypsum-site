@@ -73,7 +73,7 @@ export async function generateMetadata({
   const cat = CATEGORIES[slug];
   if (!cat) return {};
   return {
-    title: `${cat.name} Articles | Quality Gypsum Blog`,
+    title: `${cat.name} Articles`,
     description: cat.description,
     alternates: { canonical: `/category/${slug}/` },
     // Thin archive pages: keep them resolving (200) but out of the index so they

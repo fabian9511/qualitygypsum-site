@@ -11,6 +11,9 @@ export type Post = {
   image?: string; // featured image
   imageAlt?: string;
   featured?: boolean;
+  seoTitle?: string; // <=60 chars, used for the <title>
+  metaDescription?: string; // hand-written search snippet
+  faq?: { question: string; answer: string }[]; // extracted from the post's FAQ section
 };
 
 export const posts: Post[] = postsData as Post[];

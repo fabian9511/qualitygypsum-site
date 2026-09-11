@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { postsByDate, getPost, blogSlugs } from "@/lib/blog";
 import { site } from "@/lib/site";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import { CTASection } from "@/components/Section";
 import { ArrowRight } from "@/components/icons";
@@ -23,14 +23,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  const description = metaDescription(post.excerpt);
+  const description = post.metaDescription ?? metaDescription(post.excerpt);
+  // Keep the full <title> under ~60 chars: short titles get the brand suffix,
+  // longer ones are used as-is.
+  const seoTitle = post.seoTitle ?? post.title;
   return {
-    title: post.title,
+    title: seoTitle.length <= 34 ? seoTitle : { absolute: seoTitle },
     description,
     alternates: { canonical: `/${post.slug}/` },
     openGraph: {
       type: "article",
-      title: post.title,
+      title: seoTitle,
       description,
       url: `${site.domain}/${post.slug}/`,
       publishedTime: post.date,
@@ -74,7 +77,7 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription ?? post.excerpt,
     image: post.image ? `${site.domain}${post.image}` : undefined,
     datePublished: post.date,
     dateModified: post.date,
@@ -93,7 +96,7 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <JsonLd data={[jsonLd, crumbs]} />
+      <JsonLd data={post.faq?.length ? [jsonLd, crumbs, faqSchema(post.faq)] : [jsonLd, crumbs]} />
 
       <section className="relative overflow-hidden bg-ink text-white">
         <div

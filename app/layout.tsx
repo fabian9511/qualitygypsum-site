@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Quality Gypsum Services",
   },
   description:
-    "Quality Gypsum Services is a Calgary drywall contractor specializing in steel stud framing, insulation, drywall, taping, acoustical ceilings, and basement development for commercial and residential projects.",
+    "Calgary drywall contractor for steel stud framing, insulation, drywall and taping, acoustical ceilings, and basement development. Commercial and residential.",
   keywords: [
     "drywall contractor Calgary",
     "steel stud framing",

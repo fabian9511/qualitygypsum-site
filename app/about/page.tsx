@@ -17,9 +17,9 @@ const aboutSchema = {
 };
 
 export const metadata: Metadata = {
-  title: "About | Reliable Drywall Contractor in Calgary",
+  title: "About | Calgary Drywall Contractor",
   description:
-    "Quality Gypsum Services is a reliable Calgary drywall contractor built on quality, honesty, and trust. Over 10 years delivering professional drywall and insulation services.",
+    "Quality Gypsum Services is a Calgary drywall contractor built on quality, honesty, and trust, with over 10 years of drywall, framing, and insulation work.",
   alternates: { canonical: "/about/" },
 };
 

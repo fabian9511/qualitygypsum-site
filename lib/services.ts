@@ -96,7 +96,7 @@ export const services: Service[] = [
     href: "/services/drywall/",
     excerpt:
       "Premium drywall installation and finishing — from prep and hanging to Level 5 finishes and pre-occupancy touch-ups.",
-    metaTitle: "Drywall Installation & Taping in Calgary",
+    metaTitle: "Drywall Installation in Calgary",
     metaDescription:
       "Top-rated drywall installation, taping, and finishing in Calgary. Level 4 and Level 5 finishes, texture, sanding, priming, and touch-ups.",
     hero: "Premium drywall installation and finishing across Calgary.",
@@ -124,7 +124,7 @@ export const services: Service[] = [
     href: "/services/acoustical-ceilings/",
     excerpt:
       "Expert T-bar grid and tile installation — custom ceilings, clouds, and clean layouts that meet industry standards.",
-    metaTitle: "Acoustical Ceilings & T-Bar Installation in Calgary",
+    metaTitle: "Acoustical Ceilings in Calgary",
     metaDescription:
       "Acoustical ceiling grid and tile (T-bar) installation in Calgary. Custom T-bar ceilings, clouds, and precise grid layouts to industry standards.",
     hero: "Acoustical ceiling grid and tile, installed right.",
