@@ -77,12 +77,11 @@ export default async function BlogPostPage({
     description: post.excerpt,
     image: post.image ? `${site.domain}${post.image}` : undefined,
     datePublished: post.date,
-    author: { "@type": "Organization", name: post.author },
-    publisher: {
-      "@type": "Organization",
-      name: site.name,
-      url: site.domain,
-    },
+    dateModified: post.date,
+    inLanguage: "en-CA",
+    author: { "@type": "Organization", name: post.author, url: site.domain, "@id": `${site.domain}/#business` },
+    publisher: { "@id": `${site.domain}/#business` },
+    isPartOf: { "@id": `${site.domain}/#website` },
     mainEntityOfPage: `${site.domain}/${post.slug}/`,
   };
 

@@ -3,6 +3,18 @@ import Image from "next/image";
 import { PageHero, CTASection, SectionHeading } from "@/components/Section";
 import { site, values } from "@/lib/site";
 import { Check } from "@/components/icons";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `${site.domain}/about/#page`,
+  url: `${site.domain}/about/`,
+  name: "About Quality Gypsum Services",
+  mainEntity: { "@id": `${site.domain}/#business` },
+  isPartOf: { "@id": `${site.domain}/#website` },
+};
 
 export const metadata: Metadata = {
   title: "About | Reliable Drywall Contractor in Calgary",
@@ -14,6 +26,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={[aboutSchema, breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about/" }])]} />
       <PageHero
         eyebrow="About Us"
         title="How can we help you the 'Builder' succeed?"
@@ -28,6 +41,13 @@ export default function AboutPage() {
               title="A working contractor, not a middleman"
               intro="Quality Gypsum Services specializes in professional drywall and insulation across Calgary and the surrounding region. We run commercial drywall and steel stud crews full time — the same experienced people on every job, from a single basement to a full commercial fit-out."
             />
+            <p className="mt-4 leading-relaxed text-muted">
+              Quality Gypsum Services Ltd. is a drywall contractor based in southeast Calgary,
+              Alberta, working across Calgary, Airdrie, Cochrane, Chestermere, Okotoks, and High
+              River. We do steel stud framing, insulation and spray foam, drywall and taping,
+              acoustical T-bar ceilings, and basement development for builders, general
+              contractors, business owners, and homeowners.
+            </p>
             <p className="mt-4 leading-relaxed text-muted">
               With over {site.experienceYears} years of experience, we've built a reputation on
               craftsmanship, clear communication, and delivering on our promises. Your project, our
