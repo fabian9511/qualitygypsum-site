@@ -49,7 +49,7 @@ export default function AboutPage() {
               contractors, business owners, and homeowners.
             </p>
             <p className="mt-4 leading-relaxed text-muted">
-              With over {site.experienceYears} years of experience, we've built a reputation on
+              With over {site.experienceYears} years of experience, we&rsquo;ve built a reputation on
               craftsmanship, clear communication, and delivering on our promises. Your project, our
               commitment.
             </p>

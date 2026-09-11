@@ -30,7 +30,7 @@ export default function WorkWithUsPage() {
             <p className="mt-4 leading-relaxed text-muted">
               As a full-time commercial and residential drywall contractor, we rely on skilled
               people. If you take pride in your work and want to be part of a team that does it
-              right, we'd like to hear from you.
+              right, we&rsquo;d like to hear from you.
             </p>
             <ul className="mt-6 space-y-3">
               {[
