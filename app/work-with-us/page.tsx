@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import { PageHero, CTASection } from "@/components/Section";
 import { site } from "@/lib/site";
-import { Check, Mail, Phone, ArrowRight } from "@/components/icons";
+import { Check, Mail, Phone } from "@/components/icons";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Work with Us | Careers & Trade Partners | Calgary",
+  title: "Careers & Trade Partners, Calgary",
   description:
-    "Join Quality Gypsum Services — we're always looking for skilled drywall, taping, framing, and insulation professionals, plus reliable trade partners across Calgary.",
+    "Drywall, taping, framing, and insulation jobs in Calgary. Quality Gypsum Services hires skilled tradespeople full time and works with reliable trade partners.",
   alternates: { canonical: "/work-with-us/" },
 };
 
 export default function WorkWithUsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Work with Us", path: "/work-with-us/" }])} />
       <PageHero
         eyebrow="Work with Us"
         title="Build something you're proud of"
@@ -27,7 +30,7 @@ export default function WorkWithUsPage() {
             <p className="mt-4 leading-relaxed text-muted">
               As a full-time commercial and residential drywall contractor, we rely on skilled
               people. If you take pride in your work and want to be part of a team that does it
-              right, we'd like to hear from you.
+              right, we&rsquo;d like to hear from you.
             </p>
             <ul className="mt-6 space-y-3">
               {[

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/Section";
 import { site } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -11,6 +13,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Privacy Policy", path: "/privacy-policy-2/" }])} />
       <PageHero eyebrow="Legal" title="Privacy Policy" />
       <section className="bg-white">
         <div className="container-x max-w-3xl py-16">

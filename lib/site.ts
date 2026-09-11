@@ -25,6 +25,8 @@ export const site = {
   social: {
     facebook: "https://facebook.com/qualitygypsumservices",
     instagram: "https://instagram.com/qualitygypsumservices",
+    linkedin: "https://ca.linkedin.com/company/quality-gypsum-services-ltd",
+    yelp: "https://www.yelp.ca/biz/quality-gypsum-services-ltd-calgary",
   },
   clients: [
     { name: "IDEAL Insulation & Roofing", logo: "/images/clients/ideal.webp", url: "https://idealinsulation.com/" },

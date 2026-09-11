@@ -3,17 +3,20 @@ import GhlForm from "@/components/GhlForm";
 import { PageHero } from "@/components/Section";
 import { site } from "@/lib/site";
 import { Phone, Mail, MapPin, Clock } from "@/components/icons";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Get a Free Drywall Quote | Calgary",
+  title: "Free Drywall Quote in Calgary",
   description:
-    "Contact Quality Gypsum Services for a free, no-obligation drywall quote in Calgary. Call (403) 809-2908, email info@qualitygypsum.ca, or send us your project details.",
+    "Get a free, no-obligation drywall quote in Calgary. Call (403) 809-2908, email info@qualitygypsum.ca, or send Quality Gypsum Services your project details.",
   alternates: { canonical: "/contact-us/" },
 };
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact-us/" }])} />
       <PageHero
         eyebrow="Contact Us"
         title="Request a free quote"
@@ -68,6 +71,31 @@ export default function ContactPage() {
           <div>
             <GhlForm />
           </div>
+        </div>
+      </section>
+
+      {/* What happens next */}
+      <section className="bg-paper">
+        <div className="container-x py-16">
+          <h2 className="text-2xl text-ink">What happens after you reach out</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              ["1. We reply within one business day", "A real person from the office calls or emails back to understand the project: new build, renovation, basement, tenant improvement, or commercial fit-out."],
+              ["2. On-site measure, no obligation", "We visit the site anywhere in Calgary, Airdrie, Cochrane, Chestermere, Okotoks, or High River, measure it, and talk through finish levels and scheduling."],
+              ["3. Fixed written scope", "You get a written quote with a firm number and a clear list of what is included. No moving prices once the work starts."],
+            ].map(([t, b]) => (
+              <div key={t} className="rounded-2xl border border-line bg-white p-6">
+                <h3 className="font-display text-base font-bold text-ink">{t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{b}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted">
+            Quality Gypsum Services Ltd. is a drywall contractor located at {site.address}, open
+            Monday to Friday, 8:00 AM to 4:00 PM. We take on steel stud framing, insulation and spray
+            foam, drywall and taping, acoustical T-bar ceilings, and basement development for
+            builders, general contractors, business owners, and homeowners.
+          </p>
         </div>
       </section>
 

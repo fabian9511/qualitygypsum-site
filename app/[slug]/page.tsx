@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { postsByDate, getPost, blogSlugs } from "@/lib/blog";
 import { site } from "@/lib/site";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import { CTASection } from "@/components/Section";
 import { ArrowRight } from "@/components/icons";
@@ -23,19 +23,31 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const description = post.metaDescription ?? metaDescription(post.excerpt);
+  // Keep the full <title> under ~60 chars: short titles get the brand suffix,
+  // longer ones are used as-is.
+  const seoTitle = post.seoTitle ?? post.title;
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: seoTitle.length <= 34 ? seoTitle : { absolute: seoTitle },
+    description,
     alternates: { canonical: `/${post.slug}/` },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.excerpt,
+      title: seoTitle,
+      description,
       url: `${site.domain}/${post.slug}/`,
       publishedTime: post.date,
-      images: post.image ? [`${site.domain}${post.image}`] : undefined,
+      images: [`${site.domain}${post.image ?? "/images/plans-review.jpg"}`],
     },
   };
+}
+
+// Google truncates descriptions around 155–160 characters; trim long excerpts
+// at a word boundary so search snippets stay complete.
+function metaDescription(text: string, max = 155) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:\-–—]$/, "") + "…";
 }
 
 function formatDate(iso: string) {
@@ -65,15 +77,14 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription ?? post.excerpt,
     image: post.image ? `${site.domain}${post.image}` : undefined,
     datePublished: post.date,
-    author: { "@type": "Organization", name: post.author },
-    publisher: {
-      "@type": "Organization",
-      name: site.name,
-      url: site.domain,
-    },
+    dateModified: post.date,
+    inLanguage: "en-CA",
+    author: { "@type": "Organization", name: post.author, url: site.domain, "@id": `${site.domain}/#business` },
+    publisher: { "@id": `${site.domain}/#business` },
+    isPartOf: { "@id": `${site.domain}/#website` },
     mainEntityOfPage: `${site.domain}/${post.slug}/`,
   };
 
@@ -85,7 +96,7 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <JsonLd data={[jsonLd, crumbs]} />
+      <JsonLd data={post.faq?.length ? [jsonLd, crumbs, faqSchema(post.faq)] : [jsonLd, crumbs]} />
 
       <section className="relative overflow-hidden bg-ink text-white">
         <div
@@ -134,10 +145,19 @@ export default async function BlogPostPage({
 
       <section className="bg-white">
         <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.5fr_0.7fr]">
-          <article
-            className="prose-blog max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+          <div>
+            <p className="mb-8 border-l-4 border-accent pl-4 text-sm text-muted">
+              From the crew at{" "}
+              <Link href="/" className="font-semibold text-ink hover:text-accent-dark">
+                Quality Gypsum Services, a drywall contractor in Calgary
+              </Link>
+              .
+            </p>
+            <article
+              className="prose-blog max-w-none"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
+          </div>
 
           <aside className="h-fit lg:sticky lg:top-28">
             <div className="rounded-3xl bg-ink p-7 text-white">

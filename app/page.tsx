@@ -3,6 +3,8 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import { SectionHeading, CTASection, ServiceAreasStrip } from "@/components/Section";
 import { site, values } from "@/lib/site";
+import { faqSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 import { services } from "@/lib/services";
 import { projects } from "@/lib/projects";
 import { postsByDate } from "@/lib/blog";
@@ -29,12 +31,53 @@ const serviceIcons: Record<
   "basement-development": HomeIcon,
 };
 
+// Answers to the questions Calgary customers actually search for. Rendered on
+// the page and emitted as FAQPage structured data for Google and AI answers.
+const faqs = [
+  {
+    question: "Which areas does Quality Gypsum Services cover?",
+    answer:
+      "We are based in southeast Calgary and work across the whole city, plus Airdrie and Balzac, Cochrane, Chestermere, Okotoks, and High River.",
+  },
+  {
+    question: "Do you do residential drywall as well as commercial?",
+    answer:
+      "Yes. The same full-time crews that handle commercial fit-outs, tenant improvements, warehouses, and schools also do custom homes, basement developments, renovations, and multi-family projects.",
+  },
+  {
+    question: "How much does drywall installation cost in Calgary?",
+    answer:
+      "It depends on the size of the job and the level of finish. As a guide, a basement starts around $4,000 and a large home over 3,000 square feet is roughly $40,000 and up. Hourly drywall work typically runs $65 to $80 per hour. Every job gets a fixed written scope after an on-site measure, so the price you are quoted is the price you pay.",
+  },
+  {
+    question: "How do I get a quote?",
+    answer:
+      "Call (403) 809-2908 or send us the project details through the contact page. We do a no-obligation on-site measure and reply within one business day with a fixed written scope.",
+  },
+  {
+    question: "What level of drywall finish do you deliver?",
+    answer:
+      "Level 4 is our standard paint-ready finish. We also deliver Level 5 for flat ceilings and critical-lighting areas, and knockdown or custom textures where the design calls for them.",
+  },
+  {
+    question: "Are you insured and WCB covered?",
+    answer:
+      "Yes. Quality Gypsum Services is insured and WCB covered, and our crews are full-time employees, which is what general contractors and permit-ready basement suites require.",
+  },
+  {
+    question: "What else do you do besides drywall and taping?",
+    answer:
+      "Steel stud framing from shop drawings to installation, insulation and spray foam, acoustical T-bar ceilings, and complete basement development.",
+  },
+];
+
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 6);
   const featuredPosts = postsByDate.filter((p) => p.featured).slice(0, 3);
 
   return (
     <>
+      <JsonLd data={faqSchema(faqs)} />
       {/* HERO */}
       <section className="relative overflow-hidden bg-ink text-white">
         <div
@@ -154,7 +197,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Our services"
-              title="Everything from framing to final finish"
+              title="Calgary drywall services, from framing to final finish"
               intro="One accountable contractor for the full drywall scope — commercial and residential."
             />
             <Button href="/services/" variant="outline">
@@ -355,6 +398,25 @@ export default function HomePage() {
                   </span>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-paper">
+        <div className="container-x py-20 sm:py-24">
+          <SectionHeading
+            eyebrow="Good to know"
+            title="Questions Calgary customers ask us"
+            intro="Straight answers on pricing, coverage, and how we work."
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {faqs.map((f) => (
+              <div key={f.question} className="rounded-2xl border border-line bg-white p-6">
+                <h3 className="text-lg text-ink">{f.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{f.answer}</p>
+              </div>
             ))}
           </div>
         </div>

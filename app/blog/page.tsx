@@ -4,11 +4,13 @@ import Image from "next/image";
 import { PageHero, CTASection } from "@/components/Section";
 import { postsByDate } from "@/lib/blog";
 import { ArrowRight } from "@/components/icons";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Blog | Drywall Tips & Guides | Calgary",
+  title: "Drywall Blog & Guides, Calgary",
   description:
-    "Practical drywall, framing, insulation, and basement development advice from Quality Gypsum Services — Calgary's professional drywall contractor.",
+    "Practical drywall, framing, insulation, and basement development advice from Quality Gypsum Services, a working Calgary drywall contractor.",
   alternates: { canonical: "/blog/" },
 };
 
@@ -25,6 +27,7 @@ export default function BlogPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog/" }])} />
       <PageHero
         eyebrow="Blog"
         title="Drywall insight & guides"
