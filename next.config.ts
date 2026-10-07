@@ -59,6 +59,8 @@ const nextConfig: NextConfig = {
       { source: "/professional-drywall-contractor/", destination: "/", permanent: true },
       { source: "/drywall-installation/", destination: "/services/drywall/", permanent: true },
       { source: "/basementdevelopment/", destination: "/basement-development-for-homeowners/", permanent: true },
+      // Seton Carwash used to live at an old Bridgeland URL with the wrong photo.
+      { source: "/projects/custom-homes-bridgeland/", destination: "/projects/seton-carwash/", permanent: true },
     ];
   },
 };
