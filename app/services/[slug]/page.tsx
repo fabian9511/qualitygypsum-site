@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { services, getService } from "@/lib/services";
+import { projectsForService } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
 import serviceContent from "@/lib/service-content.json";
@@ -41,6 +42,7 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   const others = services.filter((s) => s.slug !== service.slug);
+  const work = projectsForService(service.slug);
   const content = (serviceContent as Record<string, string>)[service.slug];
 
   const schema = [
@@ -154,6 +156,52 @@ export default async function ServiceDetailPage({
           </aside>
         </div>
       </section>
+
+      {/* Real jobs that show this service */}
+      {work.length > 0 && (
+        <section className="border-t border-line bg-white">
+          <div className="container-x py-16">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="eyebrow text-accent-dark">Recent work</p>
+                <h2 className="mt-2 text-2xl text-ink sm:text-3xl">
+                  {service.shortTitle} on our recent projects
+                </h2>
+              </div>
+              <Link href="/projects/" className="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-accent-dark">
+                All projects <ArrowRight width={15} height={15} />
+              </Link>
+            </div>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {work.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={p.href}
+                  className="group overflow-hidden rounded-3xl border border-line bg-paper transition hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
+                >
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
+                      src={p.image}
+                      alt={`${p.title}: ${service.shortTitle.toLowerCase()} by Quality Gypsum Services`}
+                      width={800}
+                      height={534}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white">
+                      {p.category}
+                    </span>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg text-ink group-hover:text-accent-dark">{p.title}</h3>
+                    <p className="mt-2 line-clamp-2 text-sm text-muted">{p.excerpt}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Other services */}
       <section className="border-t border-line bg-paper">

@@ -351,3 +351,35 @@ export const projects: Project[] = [
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
+
+// Projects that show a given service, best first: jobs with a photo gallery,
+// then the rest. Used on the service pages so each one links to real work.
+const serviceMatch: Record<string, RegExp> = {
+  "steel-stud-framing": /stud|framing|partition/i,
+  insulation: /insulation|spray foam/i,
+  drywall: /drywall|taping|level|bulkhead/i,
+  "acoustical-ceilings": /t-bar|acoustical/i,
+  "basement-development": /basement|suite/i,
+};
+
+// Hand-picked lead projects per service so the pages don't all show the same jobs.
+const servicePicks: Record<string, string[]> = {
+  "steel-stud-framing": ["aldersyde-water-treatment-plant", "wingstop-deerfoot-meadows", "pet-valu-langdon"],
+  drywall: ["hampton-hotel-calgary", "wingstop-deerfoot-meadows", "seton-carwash"],
+  "acoustical-ceilings": ["radiant-health-calgary", "seton-carwash", "mary-browns-west-springs"],
+};
+
+export function projectsForService(serviceSlug: string, limit = 3): Project[] {
+  const picks = (servicePicks[serviceSlug] ?? [])
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is Project => Boolean(p));
+  if (picks.length >= limit) return picks.slice(0, limit);
+  const re = serviceMatch[serviceSlug];
+  let list = re ? projects.filter((p) => re.test(p.scope.join(" "))) : [];
+  if (list.length === 0 && serviceSlug === "basement-development") {
+    list = projects.filter((p) => p.category === "Residential");
+  }
+  return [...list]
+    .sort((a, b) => Number(Boolean(b.gallery)) - Number(Boolean(a.gallery)))
+    .slice(0, limit);
+}
