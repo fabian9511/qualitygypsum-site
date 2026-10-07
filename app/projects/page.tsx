@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PageHero, CTASection } from "@/components/Section";
 import { projects } from "@/lib/projects";
+import { commercialProjects, residentialProjects, type ListedProject } from "@/lib/project-list";
 import { ArrowRight } from "@/components/icons";
 import { breadcrumbSchema, collectionSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -84,7 +85,53 @@ export default function ProjectsPage() {
         </div>
       </section>
 
+      <section className="border-t border-line bg-paper">
+        <div className="container-x py-20">
+          <div className="max-w-3xl">
+            <p className="eyebrow text-accent-dark">Completed work</p>
+            <h2 className="mt-3 text-3xl text-ink sm:text-4xl">More jobs our crews have delivered</h2>
+            <p className="mt-4 leading-relaxed text-muted">
+              Recent commercial and residential jobs across Calgary and southern Alberta, built for
+              general contractors and builders including Theodore Builders, BUILD IT Calgary, LD&amp;A,
+              EFC Developments, Versatile Developments, Old Street Developments and First General.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-2">
+            <ProjectList title="Commercial" items={commercialProjects} />
+            <ProjectList title="Residential" items={residentialProjects} />
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </>
+  );
+}
+
+function ProjectList({ title, items }: { title: string; items: ListedProject[] }) {
+  return (
+    <div className="rounded-3xl border border-line bg-white p-6 sm:p-8">
+      <div className="flex items-baseline justify-between gap-4">
+        <h3 className="text-xl text-ink">{title}</h3>
+        <span className="text-sm text-muted">{items.length} projects</span>
+      </div>
+      <ul className="mt-5 divide-y divide-line">
+        {items.map((p) => (
+          <li key={p.name} className="flex flex-col gap-1 py-3.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <div>
+              <p className="font-medium text-ink">{p.name}</p>
+              <p className="text-sm text-muted">
+                {p.area}
+                {p.gc ? ` · for ${p.gc}` : ""}
+              </p>
+            </div>
+            <span className="w-fit shrink-0 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-dark">
+              {p.type}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
