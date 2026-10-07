@@ -11,7 +11,7 @@ over on migration.
 - Next.js 16 (App Router, React 19)
 - Tailwind CSS v4
 - Self-hosted fonts (Archivo + Inter via `@fontsource`) — no external font fetch
-- Fully static/SSG pages + one serverless route (`/api/contact`)
+- Fully static/SSG pages (no server routes)
 
 ## Local development
 
@@ -33,9 +33,8 @@ app/
   blog/                        /blog/
   [slug]/                      Root-level blog posts (e.g. /basement-development-in-calgary/)
   work-with-us/                /work-with-us/
-  contact-us/                  /contact-us/  (+ ContactForm client component)
+  contact-us/                  /contact-us/  (GoHighLevel form embed)
   privacy-policy-2/  terms-of-service/
-  api/contact/route.ts         Quote-form handler (Resend, with mailto fallback)
   sitemap.ts  robots.ts        Auto-generated /sitemap.xml and /robots.txt
 lib/
   site.ts  services.ts  projects.ts  blog.ts    All content lives here
@@ -57,17 +56,16 @@ page, sitemap entry, and links.
 
 ## Contact form
 
-`/api/contact` sends quote requests by email. Set `RESEND_API_KEY` (see `.env.example`) for seamless
-delivery. **Without a key it still works** — the form falls back to a pre-filled `mailto:` so leads
-always reach info@qualitygypsum.ca.
+The quote form on `/contact-us/` is the GoHighLevel "General Inquiry Form" embed
+(`components/GhlForm.tsx`). Submissions go straight into the Quality Gypsum GHL CRM. The GHL chat
+widget loads site-wide with `lazyOnload` so it never slows the first paint.
 
 ## Deploy to Vercel
 
 1. Push this folder to a GitHub repo.
 2. In Vercel: **New Project → import the repo**. Framework auto-detects as Next.js — no build
    config needed.
-3. (Optional) add `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM` under Project → Settings →
-   Environment Variables.
+3. No environment variables are needed.
 4. Deploy. Vercel auto-deploys `main` on every commit; a failed build leaves the previous deploy
    live.
 

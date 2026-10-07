@@ -50,6 +50,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: false, email: false, address: false },
   robots: { index: true, follow: true },
 };
 
@@ -65,12 +66,13 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        {/* GoHighLevel live chat widget */}
+        {/* GoHighLevel live chat widget: loads after the page is idle so it never
+            slows the first paint (same setup as subtradesoftware.com). */}
         <Script
           src="https://widgets.leadconnectorhq.com/loader.js"
           data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
           data-widget-id="6a675de5ac56ff00a1980bef"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>

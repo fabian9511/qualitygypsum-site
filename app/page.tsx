@@ -129,11 +129,12 @@ export default function HomePage() {
           <div className="relative animate-fade-up">
             <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
               <Image
+                sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
                 src="/images/plans-review.jpg"
                 alt="Quality Gypsum team reviewing project plans on a tablet on a Calgary jobsite"
                 width={1600}
                 height={1067}
-                priority
+                preload
                 className="h-[30rem] w-full object-cover object-[center_30%] sm:h-[36rem]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
@@ -285,6 +286,7 @@ export default function HomePage() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
+                    sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
                     src={p.image}
                     alt={p.title}
                     width={800}
@@ -338,6 +340,7 @@ export default function HomePage() {
                     className="flex items-center justify-center rounded-xl border border-line bg-white px-4 py-5 transition hover:border-accent hover:shadow-[var(--shadow-card)]"
                   >
                     <Image
+                      sizes="160px"
                       src={c.logo}
                       alt={c.name}
                       width={200}
@@ -375,6 +378,7 @@ export default function HomePage() {
                 {post.image && (
                   <div className="relative h-44 overflow-hidden">
                     <Image
+                      sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
                       src={post.image}
                       alt={post.imageAlt ?? post.title}
                       width={800}

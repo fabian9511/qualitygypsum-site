@@ -128,6 +128,7 @@ export default async function CategoryPage({
                 {post.image && (
                   <div className="relative h-44 overflow-hidden">
                     <Image
+                      sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
                       src={post.image}
                       alt={post.imageAlt ?? post.title}
                       width={800}

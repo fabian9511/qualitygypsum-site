@@ -56,6 +56,7 @@ export default function AboutPage() {
           </div>
           <div className="relative overflow-hidden rounded-3xl border border-line shadow-[var(--shadow-card)]">
             <Image
+              sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
               src="/images/team-tablet.jpg"
               alt="Quality Gypsum team reviewing plans on a Calgary jobsite"
               width={1600}

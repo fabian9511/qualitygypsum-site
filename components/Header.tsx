@@ -9,13 +9,14 @@ import { Phone, Menu, Close, ChevronDown, ArrowRight } from "./icons";
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-3 group" aria-label="Quality Gypsum Services — home">
+    <Link href="/" className="flex items-center gap-3 group" aria-label="Quality Gypsum Services home">
       <Image
+        sizes="160px"
         src="/images/logo-wordmark.png"
         alt="Quality Gypsum Services"
         width={1200}
         height={361}
-        priority
+        loading="eager"
         className="h-9 w-auto sm:h-10"
       />
     </Link>
@@ -48,7 +49,7 @@ export default function Header() {
         <div className="container-x flex h-18 items-center justify-between py-3">
           <Logo />
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {mainNav.map((item) =>
               item.children ? (
                 <div key={item.label} className="group relative">
@@ -59,7 +60,7 @@ export default function Header() {
                     {item.label}
                     <ChevronDown width={14} height={14} className="mt-0.5 opacity-60" />
                   </Link>
-                  <div className="invisible absolute left-0 top-full w-64 translate-y-1 rounded-2xl border border-line bg-white p-2 opacity-0 shadow-[var(--shadow-lift)] transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  <div className="invisible absolute left-0 top-full w-64 translate-y-1 rounded-2xl border border-line bg-white p-2 opacity-0 shadow-[var(--shadow-lift)] transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     {item.children.map((c) => (
                       <Link
                         key={c.href}
@@ -95,7 +96,9 @@ export default function Header() {
             <button
               onClick={() => setOpen((v) => !v)}
               className="grid h-11 w-11 place-items-center rounded-xl border border-line text-ink lg:hidden"
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
             >
               {open ? <Close /> : <Menu />}
             </button>
@@ -106,7 +109,7 @@ export default function Header() {
       {/* Mobile menu */}
       {open && (
         <div className="border-b border-line bg-white lg:hidden">
-          <nav className="container-x flex flex-col gap-1 py-4">
+          <nav id="mobile-nav" aria-label="Mobile" className="container-x flex flex-col gap-1 py-4">
             {mainNav.map((item) => (
               <div key={item.label}>
                 <Link

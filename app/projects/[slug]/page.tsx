@@ -110,12 +110,13 @@ export default async function ProjectDetailPage({
         <div className="container-x -mt-10 sm:-mt-12">
           <div className="overflow-hidden rounded-3xl border border-line shadow-[var(--shadow-card)]">
             <Image
+              sizes="(min-width: 1280px) 1216px, 100vw"
               src={project.image}
               alt={`${project.title}: ${project.scope.join(", ").toLowerCase()} by Quality Gypsum Services`}
               width={1600}
               height={900}
               className="aspect-[16/9] w-full object-cover"
-              priority
+              preload
             />
           </div>
         </div>

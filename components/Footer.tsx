@@ -12,6 +12,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <Image
+                sizes="64px"
                 src="/images/logo-icon.png"
                 alt="Quality Gypsum"
                 width={200}
@@ -28,14 +29,18 @@ export default function Footer() {
             <div className="mt-6 flex gap-3">
               <a
                 href={site.social.facebook}
-                aria-label="Facebook"
+                aria-label="Quality Gypsum on Facebook"
+                target="_blank"
+                rel="noopener"
                 className="grid h-10 w-10 place-items-center rounded-full border border-white/15 transition hover:border-accent hover:text-accent"
               >
                 <Facebook width={18} height={18} />
               </a>
               <a
                 href={site.social.instagram}
-                aria-label="Instagram"
+                aria-label="Quality Gypsum on Instagram"
+                target="_blank"
+                rel="noopener"
                 className="grid h-10 w-10 place-items-center rounded-full border border-white/15 transition hover:border-accent hover:text-accent"
               >
                 <Instagram width={18} height={18} />
@@ -44,7 +49,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold uppercase tracking-widest text-white">Company</h4>
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-white">Company</p>
             <ul className="mt-5 space-y-3 text-sm">
               {mainNav
                 .filter((n) => !n.children)
@@ -64,7 +69,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold uppercase tracking-widest text-white">Services</h4>
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-white">Services</p>
             <ul className="mt-5 space-y-3 text-sm">
               {services.map((s) => (
                 <li key={s.href}>
@@ -77,7 +82,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold uppercase tracking-widest text-white">Get in touch</h4>
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-white">Get in touch</p>
             <ul className="mt-5 space-y-4 text-sm">
               <li>
                 <a href={site.phoneHref} className="flex items-start gap-3 transition hover:text-accent">
@@ -104,7 +109,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {site.name} All rights reserved.
           </p>
           <div className="flex gap-5">
             <Link href="/privacy-policy-2/" className="hover:text-accent">

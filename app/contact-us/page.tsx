@@ -3,7 +3,7 @@ import GhlForm from "@/components/GhlForm";
 import { PageHero } from "@/components/Section";
 import { site } from "@/lib/site";
 import { Phone, Mail, MapPin, Clock } from "@/components/icons";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, contactPageSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact-us/" }])} />
+      <JsonLd data={[breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact-us/" }]), contactPageSchema]} />
       <PageHero
         eyebrow="Contact Us"
         title="Request a free quote"
