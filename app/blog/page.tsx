@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHero, CTASection } from "@/components/Section";
 import { postsByDate } from "@/lib/blog";
 import { ArrowRight } from "@/components/icons";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, collectionSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -27,7 +27,17 @@ export default function BlogPage() {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog/" }])} />
+      <JsonLd
+        data={[
+          breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog/" }]),
+          collectionSchema({
+            path: "/blog/",
+            name: "Quality Gypsum drywall blog",
+            description: "Guides on drywall, framing, insulation, ceilings and basements in Calgary.",
+            items: postsByDate.map((p) => ({ name: p.title, path: `/${p.slug}/` })),
+          }),
+        ]}
+      />
       <PageHero
         eyebrow="Blog"
         title="Drywall insight & guides"
@@ -43,6 +53,7 @@ export default function BlogPage() {
           >
             <div className="relative min-h-[260px] overflow-hidden">
               <Image
+                sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
                 src={lead.image ?? "/images/plans-review.jpg"}
                 alt={lead.imageAlt ?? lead.title}
                 width={900}
@@ -78,6 +89,7 @@ export default function BlogPage() {
                 {post.image && (
                   <div className="relative h-44 overflow-hidden">
                     <Image
+                      sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
                       src={post.image}
                       alt={post.imageAlt ?? post.title}
                       width={800}

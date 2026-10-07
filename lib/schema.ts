@@ -111,3 +111,43 @@ export function faqSchema(items: { question: string; answer: string }[]) {
     })),
   };
 }
+
+// Index pages (blog, projects): tells search and AI engines what the list is
+// and links each item, so the page reads as a hub rather than a thin page.
+export function collectionSchema(opts: {
+  path: string;
+  name: string;
+  description: string;
+  items: { name: string; path: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${base}${opts.path}#page`,
+    url: `${base}${opts.path}`,
+    name: opts.name,
+    description: opts.description,
+    isPartOf: { "@id": `${base}/#website` },
+    about: { "@id": `${base}/#business` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: opts.items.length,
+      itemListElement: opts.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: `${base}${it.path}`,
+      })),
+    },
+  };
+}
+
+export const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${base}/contact-us/#page`,
+  url: `${base}/contact-us/`,
+  name: "Request a free drywall quote",
+  isPartOf: { "@id": `${base}/#website` },
+  about: { "@id": `${base}/#business` },
+};

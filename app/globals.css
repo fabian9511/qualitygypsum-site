@@ -145,6 +145,16 @@ h1, h2, h3, h4, h5 {
   margin: 1.5rem 0;
   font-size: 0.95rem;
 }
+/* Wide pricing/comparison tables scroll inside the post on phones
+   instead of pushing the whole page sideways. */
+@media (max-width: 767px) {
+  .prose-blog table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.prose-blog { overflow-wrap: break-word; }
 .prose-blog th, .prose-blog td {
   border: 1px solid var(--color-line);
   padding: 0.6rem 0.8rem;

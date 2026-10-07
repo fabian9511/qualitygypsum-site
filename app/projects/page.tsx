@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHero, CTASection } from "@/components/Section";
 import { projects } from "@/lib/projects";
 import { ArrowRight } from "@/components/icons";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, collectionSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -17,7 +17,17 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Projects", path: "/projects/" }])} />
+      <JsonLd
+        data={[
+          breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Projects", path: "/projects/" }]),
+          collectionSchema({
+            path: "/projects/",
+            name: "Quality Gypsum projects in Calgary",
+            description: "Commercial, tenant improvement and residential drywall projects by Quality Gypsum Services.",
+            items: projects.map((p) => ({ name: p.title, path: p.href })),
+          }),
+        ]}
+      />
       <PageHero
         eyebrow="Our Work"
         title="Projects across Calgary & area"
@@ -44,6 +54,7 @@ export default function ProjectsPage() {
               >
                 <div className="relative h-52 overflow-hidden">
                   <Image
+                    sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"
                     src={p.image}
                     alt={`${p.title}: ${p.category.toLowerCase()} drywall project by Quality Gypsum Services`}
                     width={800}

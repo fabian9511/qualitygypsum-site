@@ -100,12 +100,13 @@ export default async function ServiceDetailPage({
         <div className="container-x -mt-10 sm:-mt-12">
           <div className="overflow-hidden rounded-3xl border border-line shadow-[var(--shadow-card)]">
             <Image
+              sizes="(min-width: 1280px) 1216px, 100vw"
               src={service.image}
               alt={service.title}
               width={1600}
               height={800}
               className="aspect-[2/1] w-full object-cover"
-              priority
+              preload
             />
           </div>
         </div>
