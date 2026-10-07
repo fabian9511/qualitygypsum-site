@@ -18,6 +18,27 @@ export type Project = {
 // Slugs preserved exactly from the existing site's URL structure.
 export const projects: Project[] = [
   {
+    slug: "aldersyde-water-treatment-plant",
+    title: "Aldersyde Water Treatment Plant",
+    href: "/projects/aldersyde-water-treatment-plant/",
+    image: "/images/projects/aldersyde-water-treatment-plant.webp",
+    category: "Industrial",
+    location: "Aldersyde, Alberta",
+    year: "2026",
+    excerpt: "Steel stud framing, drywall and fire-rated column wraps through a new water treatment plant south of Calgary.",
+    scope: ["Steel stud framing", "Ceiling framing", "Drywall and taping", "Fire-rated column wraps", "Acoustical T-bar ceilings"],
+    body: [
+      "A new water treatment plant in Aldersyde, south of Calgary. Our crews framed the interior in steel stud from the slab up: tall walls through the process areas, rooms and corridors, and the ceiling framing above them, worked in and around the plant piping and mechanical.",
+      "We boarded and taped the walls, built fire-rated wraps around the structural columns and bulkheads, and hung the T-bar ceilings in the occupied rooms. It is the kind of heavy commercial steel stud job our full-time crews are built for.",
+    ],
+    gallery: [
+      "/images/projects/aldersyde-water-treatment-plant-2.webp",
+      "/images/projects/aldersyde-water-treatment-plant-3.webp",
+      "/images/projects/aldersyde-water-treatment-plant-4.webp",
+      "/images/projects/aldersyde-water-treatment-plant-5.webp",
+    ],
+  },
+  {
     slug: "wingstop-deerfoot-meadows",
     title: "Wingstop, Deerfoot Meadows",
     href: "/projects/wingstop-deerfoot-meadows/",
