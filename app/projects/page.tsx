@@ -91,9 +91,8 @@ export default function ProjectsPage() {
             <p className="eyebrow text-accent-dark">Completed work</p>
             <h2 className="mt-3 text-3xl text-ink sm:text-4xl">More jobs our crews have delivered</h2>
             <p className="mt-4 leading-relaxed text-muted">
-              Recent commercial and residential jobs across Calgary and southern Alberta, built for
-              general contractors and builders including Theodore Builders, BUILD IT Calgary, LD&amp;A,
-              EFC Developments, Versatile Developments, Old Street Developments and First General.
+              Recent commercial and residential jobs across Calgary and southern Alberta: retail
+              stores, restaurants, offices, clinics, hotels, multi-family and home renovations.
             </p>
           </div>
 
@@ -121,10 +120,7 @@ function ProjectList({ title, items }: { title: string; items: ListedProject[] }
           <li key={p.name} className="flex flex-col gap-1 py-3.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
             <div>
               <p className="font-medium text-ink">{p.name}</p>
-              <p className="text-sm text-muted">
-                {p.area}
-                {p.gc ? ` · for ${p.gc}` : ""}
-              </p>
+              <p className="text-sm text-muted">{p.area}</p>
             </div>
             <span className="w-fit shrink-0 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-dark">
               {p.type}
