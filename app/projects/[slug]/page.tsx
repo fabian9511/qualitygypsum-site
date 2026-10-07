@@ -206,6 +206,28 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="bg-white">
+          <div className="container-x pb-20">
+            <h2 className="text-2xl text-ink">On site</h2>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {project.gallery.map((src, i) => (
+                <div key={src} className="overflow-hidden rounded-2xl border border-line">
+                  <Image
+                    sizes="(min-width: 1280px) 300px, (min-width: 640px) 50vw, 100vw"
+                    src={src}
+                    alt={`${project.title} site photo ${i + 2} by Quality Gypsum Services`}
+                    width={800}
+                    height={1067}
+                    className="aspect-[3/4] w-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="border-t border-line bg-paper">
         <div className="container-x py-16">
           <h2 className="text-2xl text-ink">More projects</h2>

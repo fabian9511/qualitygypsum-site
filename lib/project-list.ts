@@ -10,18 +10,14 @@ export type ListedProject = {
 };
 
 export const commercialProjects: ListedProject[] = [
-  { name: "Hampton Hotel", type: "Hotel", area: "NE Calgary" },
   { name: "Walmart, 130 Avenue SE", type: "Retail", area: "SE Calgary" },
   { name: "Walmart, Shawville", type: "Retail", area: "SE Calgary" },
   { name: "Bulk Barn, Country Hills", type: "Retail", area: "NE Calgary" },
-  { name: "Pet Valu, Langdon", type: "Retail", area: "Langdon" },
   { name: "Pet Valu, Chestermere", type: "Retail", area: "Chestermere" },
   { name: "Inspired Cannabis, Lethbridge", type: "Retail", area: "Lethbridge" },
   { name: "Inspired Cannabis, Strathmore", type: "Retail", area: "Strathmore" },
   { name: "Cannabis store, Cochrane", type: "Retail", area: "Cochrane" },
-  { name: "Wingstop, Deerfoot Meadows", type: "Restaurant", area: "SE Calgary" },
   { name: "Mary Brown's, Medicine Hat", type: "Restaurant", area: "Medicine Hat" },
-  { name: "Mary Brown's, West Springs", type: "Restaurant", area: "SW Calgary" },
   { name: "Tim Hortons, Homestead", type: "Restaurant", area: "NE Calgary" },
   { name: "Red's Diner, Seton", type: "Restaurant", area: "SE Calgary" },
   { name: "Hello Nori, Bridgeland", type: "Restaurant", area: "NE Calgary" },
@@ -36,7 +32,6 @@ export const commercialProjects: ListedProject[] = [
   { name: "Aero Drive industrial unit", type: "Demolition", area: "NE Calgary" },
   { name: "Lincoln Park demolition and drywall", type: "Commercial", area: "SW Calgary" },
   { name: "Alberta Family Clinic, Airdrie", type: "Clinic", area: "Airdrie" },
-  { name: "Radiant Health", type: "Clinic", area: "SW Calgary" },
   { name: "FS8 Marda Loop", type: "Fitness studio", area: "SW Calgary" },
 ];
 
